@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#e9f5fc">
+  <title>해사법령 아카이브</title>
+  <link rel="icon" href="./assets/maritime-ship-emblem.png?v=cb7d7b861753" type="image/png">
+  <link rel="stylesheet" href="./styles.css?v=576c90f66200">
+</head>
+<body data-view="home">
+  <a class="skip-link" href="#mainContent">본문으로 바로가기</a>
+  <header class="site-header">
+    <div class="archive-strip"><div class="home-width"><span>MARITIME LAW ARCHIVE</span><div><a href="#results" data-browse>전체 자료</a><a href="?saved=1#results" data-open-saved><i data-lucide="bookmark" aria-hidden="true"></i>내 서재</a></div></div></div>
+    <div class="header-inner">
+      <a class="brand" href="#home" data-home aria-label="해사법령 아카이브 홈">
+        <img src="./assets/maritime-ship-emblem.png?v=cb7d7b861753" alt="" width="46" height="46">
+        <span><strong>해사법령 아카이브</strong><small>MARITIME LAW ARCHIVE</small></span>
+      </a>
+      <form id="searchForm" class="global-search" role="search" aria-label="전체 자료 검색">
+        <label class="sr-only" for="searchInput">법령명·약칭·조문 검색</label>
+        <i data-lucide="search" aria-hidden="true"></i>
+        <input id="searchInput" type="search" placeholder="법령명·약칭·조문 검색" autocomplete="off">
+        <button type="submit">검색</button>
+      </form>
+      <button class="header-saved" id="showSaved" type="button" aria-label="저장한 자료" title="저장한 자료"><i data-lucide="bookmark" aria-hidden="true"></i><span>저장한 자료</span></button>
+      <img class="archive-vessel" src="./assets/maritime-ship-emblem.png?v=cb7d7b861753" alt="" width="168" height="140" fetchpriority="high">
+    </div>
+  </header>
+  <main id="mainContent" tabindex="-1">
+      <nav id="browseNav" class="primary-nav" aria-label="자료 구분"><div class="nav-inner">
+        <button type="button" data-home>홈</button>
+        <button type="button" data-origin="전체">전체 자료 <span id="countAll"></span></button>
+        <button type="button" data-origin="국내">국내 법령 <span id="countDomestic"></span></button>
+        <button type="button" data-type="조약">국제 조약 <span id="countInternational"></span></button>
+        <button type="button" data-type="국제규칙">운송규칙 <span id="countRules"></span></button>
+        <button type="button" data-type="표준계약서">표준계약서 <span id="countContracts"></span></button>
+        <button type="button" data-home-index>분야별 색인</button>
+      </div></nav>
+    <div id="homeView">
+      <div class="home-layout home-width">
+      <section class="home-search-band" aria-labelledby="homeTitle">
+          <div class="home-title-row"><h1 id="homeTitle">자료 검색</h1><p id="homeCollectionCount" class="collection-count"></p></div>
+          <form id="homeSearchForm" class="home-search-form" role="search" aria-label="메인 통합 검색">
+            <div class="home-search-entry">
+            <label class="sr-only" for="homeSearchInput">통합 검색어</label>
+            <input id="homeSearchInput" type="search" placeholder="법령명, 약칭 또는 조문 내용 검색" autocomplete="off">
+            <button type="submit" aria-label="검색" title="검색"><i data-lucide="search" aria-hidden="true"></i><span>검색</span></button>
+            </div>
+            <div class="home-search-options">
+              <fieldset class="home-search-target"><legend class="sr-only">메인 검색 범위</legend><label><input type="radio" name="homeTarget" value="all" data-home-target="all" checked>제목 + 본문</label><label><input type="radio" name="homeTarget" value="title" data-home-target="title">제목만</label></fieldset>
+              <label class="home-scope" for="homeSearchScope"><span>자료 유형</span><select id="homeSearchScope"><option value="all">전체 자료</option><option value="domestic">국내 법령</option><option value="international">국제 자료</option><option value="treaty">국제 조약</option><option value="rules">운송규칙</option><option value="contract">표준계약서</option></select></label>
+              <a class="advanced-search" href="#results" data-browse>상세검색<i data-lucide="arrow-right" aria-hidden="true"></i></a>
+            </div>
+          </form>
+          <div id="searchHistory" class="search-history" hidden></div>
+      </section>
+        <section class="home-directory" aria-labelledby="directoryTitle">
+          <div class="home-section-heading"><h2 id="directoryTitle">분야별 자료</h2><a href="#homeFields" data-home-index>전체 분야<i data-lucide="arrow-down" aria-hidden="true"></i></a></div>
+          <div id="homeSubjects" class="home-subjects"></div>
+          <div class="home-section-heading type-heading"><h2>자료 유형별</h2><a href="#results" data-browse>전체 자료<i data-lucide="arrow-right" aria-hidden="true"></i></a></div>
+          <div id="homeTypes" class="home-types"></div>
+          <div id="homeFields" class="home-section-heading field-heading" tabindex="-1"><h2>전체 분야 색인</h2><span id="homeFieldCount"></span></div>
+          <div id="homeCategories" class="home-categories"></div>
+        </section>
+        <aside class="home-personal" aria-label="나의 열람 자료">
+          <section aria-labelledby="homeRecentTitle">
+            <div class="home-section-heading"><h2 id="homeRecentTitle">나의 열람 기록</h2><button type="button" id="clearRecent" class="icon-button" aria-label="열람 기록 지우기" title="열람 기록 지우기"><i data-lucide="trash-2" aria-hidden="true"></i></button></div>
+            <div id="homeRecent" class="home-recent"></div>
+          </section>
+          <section class="home-saved-section" aria-labelledby="homeSavedTitle">
+            <div class="home-section-heading"><h2 id="homeSavedTitle">저장한 자료<span id="homeSavedCount"></span></h2><a href="?saved=1#results" data-open-saved>모두 보기<i data-lucide="arrow-right" aria-hidden="true"></i></a></div>
+            <div id="homeSaved" class="home-saved"></div>
+          </section>
+          <section class="home-quick-section" aria-labelledby="homeQuickTitle"><div class="home-section-heading"><h2 id="homeQuickTitle">주요 자료</h2></div><div id="homeQuickLinks" class="home-quick-links"></div></section>
+        </aside>
+      </div>
+      <footer class="site-footer home-width"><span>해사법령 아카이브</span><a href="./data/AUDIT-2026-09-05.md" target="_blank" rel="noreferrer">자료 점검 기록<i data-lucide="arrow-up-right" aria-hidden="true"></i></a></footer>
+    </div>
+    <div id="catalogView" hidden>
+      <div class="catalog-heading content-width"><div><p class="eyebrow">해사법 자료실</p><h1>법령과 조약 찾아보기</h1></div><p class="collection-count" id="collectionCount"></p></div>
+      <div class="catalog-layout content-width" id="results">
+        <aside class="catalog-sidebar" aria-label="자료 필터">
+          <details class="filter-disclosure" open>
+            <summary>검색 조건 <i data-lucide="sliders-horizontal" aria-hidden="true"></i></summary>
+            <div class="filter-section"><h2>문서 종류</h2><div id="typeFilters" class="filter-list"></div></div>
+            <div class="filter-section"><h2>법분야</h2><div id="categoryFilters" class="filter-list"></div></div>
+            <div class="filter-section secondary-filters">
+              <label for="agencySelect">소관 기관·기구</label><select id="agencySelect"></select>
+              <label for="statusFilter">법령·조약 상태</label>
+              <select id="statusFilter"><option value="전체">전체 상태</option><option value="현행">현행 법령 / 발효 조약</option><option value="미발효">미발효</option><option value="폐지">폐지 / 효력 종료</option><option value="시행예정">시행예정</option><option value="예시">예시</option></select>
+              <label class="checkbox-label"><input id="includeExamples" type="checkbox">예시 자료 포함 <span id="exampleCount"></span></label>
+            </div>
+          </details>
+          <details class="sidebar-secondary" id="dataTools"><summary>데이터 관리</summary>
+            <label class="file-button">JSON 가져오기<input id="importFile" type="file" accept="application/json,.json"></label>
+            <button id="exportData" type="button">JSON 내보내기</button>
+            <button id="resetData" type="button">기본 자료 복원</button>
+            <a href="./data/import-template.json" download>양식 JSON</a>
+            <a href="./data/AUDIT-2026-09-05.md" target="_blank" rel="noreferrer">데이터 점검 기록</a>
+          </details>
+        </aside>
+        <section class="catalog-results" aria-label="법령 및 조약 목록">
+          <div class="results-toolbar"><div><h2 id="activeScope">전체 자료</h2><span id="resultCount" role="status" aria-live="polite"></span></div>
+            <label class="sort-control">정렬<select id="sortSelect"><option value="archive">자료 순서</option><option value="title">이름순</option><option value="updated">자료 갱신순</option><option value="matched">검색 적합순</option></select></label>
+          </div>
+          <div class="search-options"><div class="search-target" role="group" aria-label="검색 범위"><button type="button" data-search-target="all">법령명 + 본문</button><button type="button" data-search-target="title">법령명만</button></div><button id="clearFilters" class="quiet-button" type="button"><i data-lucide="rotate-ccw" aria-hidden="true"></i>초기화</button></div>
+          <div id="activeFilters" class="active-filters"></div>
+          <div class="list-column-head" aria-hidden="true"><span>자료명</span><span>분야 / 수록 범위</span><span>상태</span><span></span></div>
+          <div id="lawList"></div><div id="listFooter" class="list-footer"></div>
+          <section class="recent-section" id="recentSection" hidden><h2>최근 열람</h2><div id="recentList"></div></section>
+        </section>
+      </div>
+      <footer class="site-footer content-width"><span>해사법령 아카이브</span><span>법령·조약의 수록 범위와 출처는 각 자료에서 확인할 수 있습니다.</span></footer>
+    </div>
+    <section id="readerView" hidden aria-label="법령 열람"></section>
+  </main>
+  <dialog id="lawSwitcher" aria-labelledby="switcherTitle">
+    <div class="dialog-heading"><h2 id="switcherTitle">다른 법령·조약 찾기</h2><button type="button" class="icon-button" data-close-dialog="lawSwitcher" aria-label="닫기" title="닫기"><i data-lucide="x"></i></button></div>
+    <label class="switcher-search"><i data-lucide="search" aria-hidden="true"></i><input id="switcherInput" type="search" aria-label="전환할 법령 검색" placeholder="법령명 또는 약칭" autocomplete="off"></label>
+    <div id="switcherList" class="switcher-list"></div>
+  </dialog>
+  <dialog id="restoreDialog" aria-labelledby="restoreTitle">
+    <div class="dialog-heading"><h2 id="restoreTitle">기본 자료로 복원</h2><button type="button" class="icon-button" data-close-dialog="restoreDialog" aria-label="닫기"><i data-lucide="x"></i></button></div>
+    <p>이 브라우저에서 가져온 자료를 기본 자료로 교체합니다. 필요한 자료는 먼저 JSON으로 내보내세요. 저장한 자료 표시는 유지됩니다.</p>
+    <div class="dialog-actions"><button type="button" data-close-dialog="restoreDialog">취소</button><button type="button" id="confirmRestore" class="primary-button">기본 자료 복원</button></div>
+  </dialog>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="./assets/lucide.min.js?v=ab85225ecc1d" defer></script>
+  <script src="./data/laws.js?v=e923ddb0226a" defer></script>
+  <script src="./app.js?v=bd6fc96ccd91" defer></script>
+</body>
+</html>
