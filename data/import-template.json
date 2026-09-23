@@ -1,0 +1,45 @@
+{
+  "laws": [
+    {
+      "id": "unique-law-id",
+      "title": "법령 전체 이름",
+      "shortTitle": "짧은 이름",
+      "type": "법률",
+      "category": "해사안전",
+      "status": "현행",
+      "issuer": "소관 기관",
+      "ministry": "부처명",
+      "promulgationDate": "2026-01-01",
+      "enforcementDate": "2026-07-01",
+      "lastUpdated": "2026-07-01",
+      "sourceUrl": "https://example.com/source",
+      "keywords": ["검색어", "별칭", "핵심 용어"],
+      "aliases": ["약칭", "영문명"],
+      "history": [
+        {
+          "date": "2026-07-01",
+          "type": "일부개정",
+          "summary": "개정 요약"
+        }
+      ],
+      "sections": [
+        {
+          "id": "part-1",
+          "title": "제1장 총칙",
+          "articles": [
+            {
+              "id": "article-1",
+              "number": "제1조",
+              "title": "목적",
+              "body": [
+                "조문 원문 1항",
+                "조문 원문 2항"
+              ],
+              "tags": ["목적", "정의"]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
